@@ -1,0 +1,38 @@
+var React = require('react');
+// must require the other 'greeter' components here because this is were they are being used.. not in app.jsx
+var GreeterMessage = require('GreeterMessage');
+var GreeterForm = require('GreeterForm');
+
+var Greeter = React.createClass({
+  getDefaultProps: function (){
+    return {
+      name: 'React',
+      message: 'This is the default message!'
+    };
+  },
+
+  getInitialState: function() {
+    return {
+      name: this.props.name,
+      message: this.props.message
+    };
+  },
+  handleNewData(updates){
+    this.setState(updates);
+  },
+  render: function(){
+    var name = this.state.name;
+    var message = this.state.message;
+    console.log(message);
+
+    return (
+      <div>
+        <GreeterMessage name={name} message={message}/>
+        <GreeterForm onNewData={this.handleNewData}/>
+      </div>
+    );
+  }
+});
+
+
+module.exports = Greeter;
